@@ -1,12 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./Component/App";
+import { ApolloProvider } from "@apollo/react-hooks";
+import {
+  ApolloClient,
+  NormalizedCacheObject,
+  InMemoryCache
+} from "apollo-boost";
+import { resolvers, typeDefs } from "./resolvers";
+import GlobalStyle from "./global-styles";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const cache = new InMemoryCache();
+const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  cache,
+  resolvers,
+  typeDefs
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+cache.writeData({
+  data: {
+    auth: {
+      __typename: "Auth",
+      isLoggedIn: Boolean(localStorage.getItem("jwt"))
+    }
+  }
+});
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <GlobalStyle />
+    <App />
+  </ApolloProvider>,
+  document.getElementById("root")
+);
