@@ -5,16 +5,27 @@ import { ApolloProvider } from "@apollo/react-hooks";
 import {
   ApolloClient,
   NormalizedCacheObject,
-  InMemoryCache
+  InMemoryCache,
+  ApolloLink,
+  from,
+  HttpLink
 } from "apollo-boost";
 import { resolvers, typeDefs } from "./resolvers";
 import GlobalStyle from "./global-styles";
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  console.log(operation.getContext());
+  return forward(operation);
+});
+
+const httpLink = new HttpLink({ uri: "/" });
 
 const cache = new InMemoryCache();
 const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache,
   resolvers,
-  typeDefs
+  typeDefs,
+  link: from([authMiddleware, httpLink])
 });
 
 cache.writeData({

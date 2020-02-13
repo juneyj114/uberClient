@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, RouteComponentProps } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { myTheme } from "../../myTheme";

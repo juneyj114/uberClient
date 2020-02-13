@@ -4,10 +4,11 @@ import Input from "../../Component/Input";
 import { Helmet } from "react-helmet";
 import Header from "../../Component/Header";
 import Button from "../../Component/Button";
+import Form from "../../Component/Form";
 
 const Container = styled.div``;
 
-const Form = styled.form`
+const ExtendForm = styled(Form)`
   padding: 0px 40px;
 `;
 
@@ -15,20 +16,30 @@ const ExtendedInput = styled(Input)`
   margin-bottom: 20px;
 `;
 
-const VerifyPhonePresenter = () => (
+interface IProps {
+  onChange: React.ChangeEventHandler;
+  onSubmit: any;
+  verificationKey: string;
+}
+
+const VerifyPhonePresenter = ({
+  onChange,
+  verificationKey,
+  onSubmit
+}: IProps) => (
   <Container>
     <Helmet>
       <title>Verify Phone</title>
     </Helmet>
     <Header backTo={"/phone-login"} title={"Verify Phone Number"} />
-    <Form>
+    <ExtendForm submitFn={onSubmit}>
       <ExtendedInput
-        value={""}
+        value={verificationKey}
         placeholder={"Enter Verification Code"}
-        onChange={() => {}}
+        onChange={onChange}
       />
-      <Button value={"Submit"} onClick={null} />
-    </Form>
+      <Button value={"Submit"} onClick={onSubmit} />
+    </ExtendForm>
   </Container>
 );
 

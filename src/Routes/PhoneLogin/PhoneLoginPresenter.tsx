@@ -4,6 +4,7 @@ import Helmet from "react-helmet";
 import countries from "../../countries";
 import Input from "../../Component/Input";
 import BackArrow from "../../Component/BackArrow";
+import Form from "../../Component/Form";
 
 const Container = styled.div`
   margin-top: 30px;
@@ -36,7 +37,7 @@ const CountrySelect = styled.select`
 
 const CountryOption = styled.option``;
 
-const Form = styled.form``;
+const ExtendForm = styled(Form)``;
 
 const Button = styled.button`
   box-shadow: 0 18px 35px rgba(50, 50, 93, 0.1), 0 8px 15px rgba(0, 0, 0, 0.07);
@@ -79,7 +80,7 @@ const PhoneLoginPresenter = ({
         </CountryOption>
       ))}
     </CountrySelect>
-    <Form onSubmit={onSubmit}>
+    <ExtendForm submitFn={onSubmit}>
       <Input
         placeholder={"010 1234 5678"}
         value={phoneNumber}
@@ -97,7 +98,7 @@ const PhoneLoginPresenter = ({
           <path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z" />
         </svg>
       </Button>
-    </Form>
+    </ExtendForm>
   </Container>
 );
 

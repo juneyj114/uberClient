@@ -36,7 +36,12 @@ const SocialLoginPresenter = () => (
     </Helmet>
     <BackArrowExtended backTo={"/"} />
     <Title>Choose an account</Title>
-    <Link>
+    <Link
+      onClick={async () => {
+        window.location.href =
+          "http://localhost:8080/oauth2/authorization/facebook";
+      }}
+    >
       <Icon>
         <svg
           xmlns="http://www.w3.org/2000/svg"

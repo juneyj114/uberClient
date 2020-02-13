@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect,
-  RouteComponentProps
-} from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Login from "../../Routes/Login";
 import PhoneLogin from "../../Routes/PhoneLogin";
 import VerifyPhone from "../../Routes/VerifyPhone";
@@ -17,6 +11,7 @@ import Home from "../../Routes/Home";
 import Places from "../../Routes/Places";
 import Ride from "../../Routes/Ride";
 import Settings from "../../Routes/Settings";
+import Token from "../../Routes/Token";
 
 interface IProps {
   isLoggedIn: boolean;
@@ -36,6 +31,7 @@ const LoggedOutRoutes: React.FC = () => (
     <Route path="/phone-login" component={PhoneLogin}></Route>
     <Route path="/verify-phone" component={VerifyPhone}></Route>
     <Route path="/social-login" component={SocialLogin}></Route>
+    <Route path="/token" component={Token}></Route>
     <Redirect to="/" from="*" />
   </Switch>
 );

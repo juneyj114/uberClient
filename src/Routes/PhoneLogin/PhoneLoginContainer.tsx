@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PhoneLoginPresenter from "./PhoneLoginPresenter";
 import { toast } from "react-toastify";
 import axios from "../../api";
-import { useHistory, RouteComponentProps } from "react-router-dom";
+import { RouteComponentProps } from "react-router-dom";
 
 interface State {
   countryCode: string;
@@ -30,19 +30,18 @@ const PhoneLoginContainer: React.FC<RouteComponentProps> = props => {
     });
   };
 
-  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const phoneNumber = `${state.countryCode}${state.phoneNumber}`;
-    const isValid = /^\+[1-9]{1}[0-9]{10,12}$/.test(phoneNumber);
+  const onSubmit = async () => {
+    const phone = `${state.countryCode}${state.phoneNumber}`;
+    const isValid = /^\+[1-9]{1}[0-9]{10,12}$/.test(phone);
     if (isValid) {
       const res = await axios.post("/verification/phone", {
-        payload: phoneNumber
+        payload: phone
       });
       if (res.data) {
         history.push({
           pathname: "verify-phone",
           state: {
-            phoneNumber
+            phone
           }
         });
       } else {

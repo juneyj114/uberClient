@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import SocialLoginPresenter from "./SocialLoginPresenter";
 
 const SocialLoginContainer = () => <SocialLoginPresenter />;
