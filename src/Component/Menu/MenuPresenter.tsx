@@ -77,29 +77,43 @@ const ToggleDriving = styled.button<IToggleProps>`
   cursor: pointer;
 `;
 
-const MenuPresenter = () => {
+interface IProps {
+  user: {
+    profilePhoto: string;
+    fullName: string;
+    isDriving: boolean;
+  };
+  loading: boolean;
+  toggleDriveMode: any;
+}
+
+const MenuPresenter = ({ user, loading, toggleDriveMode }: IProps) => {
   return (
     <Container>
-      <Header>
-        <Grid>
-          <Link to={"/edit-account"}>
-            <Image
-              src={
-                "https://yt3.ggpht.com/-CTwXMuZRaWw/AAAAAAAAAAI/AAAAAAAAAAA/HTJy-KJ4F2c/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
-              }
-            ></Image>
-          </Link>
-          <Text>
-            <Name>name</Name>
-            <Rating>5</Rating>
-          </Text>
-        </Grid>
-      </Header>
-      <SLink to="/trips">Your Trips</SLink>
-      <SLink to="/settings">Settings</SLink>
-      <ToggleDriving isDriving={true} theme={myTheme}>
-        {true ? "Stop driving" : "Start driving"}
-      </ToggleDriving>
+      {!loading && (
+        <React.Fragment>
+          <Header>
+            <Grid>
+              <Link to={"/edit-account"}>
+                <Image src={user.profilePhoto}></Image>
+              </Link>
+              <Text>
+                <Name>{user.fullName}</Name>
+                <Rating>5</Rating>
+              </Text>
+            </Grid>
+          </Header>
+          <SLink to="/trips">Your Trips</SLink>
+          <SLink to="/settings">Settings</SLink>
+          <ToggleDriving
+            isDriving={user.isDriving}
+            onClick={toggleDriveMode}
+            theme={myTheme}
+          >
+            {user.isDriving ? "Stop driving" : "Start driving"}
+          </ToggleDriving>
+        </React.Fragment>
+      )}
     </Container>
   );
 };

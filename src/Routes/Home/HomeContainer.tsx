@@ -3,19 +3,16 @@ import HomePresenter from "./HomePresenter";
 
 const HomeContainer = () => {
   const [state, setState] = useState({
-    sidebarOpen: true
+    isMenuOpen: false
   });
 
-  const onSetSidebarOpen = (open: boolean): void => {
+  const toggleMenu = (open: boolean): void => {
     setState({
-      sidebarOpen: open
+      isMenuOpen: open
     });
   };
   return (
-    <HomePresenter
-      sidebarOpen={state.sidebarOpen}
-      onSetSidebarOpen={onSetSidebarOpen}
-    />
+    <HomePresenter isMenuOpen={state.isMenuOpen} toggleMenu={toggleMenu} />
   );
 };
 

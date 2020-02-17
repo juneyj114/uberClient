@@ -3,19 +3,19 @@ import Sidebar from "react-sidebar";
 import Menu from "../../Component/Menu";
 
 interface IProps {
-  sidebarOpen: boolean;
-  onSetSidebarOpen: (open: boolean) => void;
+  isMenuOpen: boolean;
+  toggleMenu: (open: boolean) => void;
 }
 
-const HomePresenter = ({ sidebarOpen, onSetSidebarOpen }: IProps) => {
+const HomePresenter = ({ isMenuOpen, toggleMenu }: IProps) => {
   return (
     <Sidebar
       sidebar={<Menu />}
-      open={sidebarOpen}
-      onSetOpen={onSetSidebarOpen}
+      open={isMenuOpen}
+      onSetOpen={toggleMenu}
       styles={{ sidebar: { background: "white", width: "80%", zIndex: "10" } }}
     >
-      <button onClick={() => onSetSidebarOpen(true)}>Open sidebar</button>
+      <button onClick={() => toggleMenu(true)}>Open sidebar</button>
     </Sidebar>
   );
 };
