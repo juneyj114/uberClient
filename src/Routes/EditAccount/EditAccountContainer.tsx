@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import EditAccountPresenter from "./EditAccountPresenter";
 import axios from "../../api";
+import axiosOri from "axios";
 import { toast } from "react-toastify";
 
 interface IState {
   firstName: string;
   lastName: string;
   email: string;
+  profilePhoto: string;
+  uploading: boolean;
 }
 
 interface User {
@@ -14,6 +17,7 @@ interface User {
     firstName: string;
     lastName: string;
     email: string;
+    profilePhoto: string;
   };
 }
 
@@ -21,17 +25,21 @@ const EditAccountContainer = () => {
   const [state, setState] = useState<IState>({
     firstName: "",
     lastName: "",
-    email: ""
+    email: "",
+    profilePhoto: "",
+    uploading: false
   });
 
   const getUser = async (): Promise<void> => {
     const {
-      data: { firstName, lastName, email }
+      data: { firstName, lastName, email, profilePhoto }
     }: User = await axios.get("/user");
     setState({
       firstName,
       lastName,
-      email
+      email,
+      profilePhoto,
+      uploading: false
     });
   };
 
@@ -48,15 +56,41 @@ const EditAccountContainer = () => {
     }
   };
 
-  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
-      target: { name, value }
+      target: { name, value, files }
     } = event;
 
-    setState({
-      ...state,
-      [name]: value
-    });
+    if (files) {
+      setState({
+        ...state,
+        uploading: true
+      });
+      const formData = new FormData();
+      formData.append("file", files[0]);
+      formData.append("upload_preset", "jqsimj4h");
+      const {
+        data: { url }
+      } = await axiosOri.post(
+        "https://api.cloudinary.com/v1_1/dy3tu4j6h/upload",
+        formData
+      );
+
+      if (url) {
+        console.log(url);
+        setState({
+          ...state,
+          profilePhoto: url,
+          uploading: false
+        });
+        console.log(state);
+      }
+    } else {
+      setState({
+        ...state,
+        [name]: value
+      });
+    }
   };
 
   return (

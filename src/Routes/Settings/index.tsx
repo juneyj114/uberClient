@@ -1,3 +1,3 @@
-import React from "react";
+import SettingsContainer from "./SettingsContainer";
 
-export default () => <span>Settings</span>;
+export default SettingsContainer;
