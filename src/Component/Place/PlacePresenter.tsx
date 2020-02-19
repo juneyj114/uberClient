@@ -32,11 +32,12 @@ interface IProps {
   fav: boolean;
   name: string;
   address: string;
+  onStarPress: () => Promise<void>;
 }
 
-const PlacePresenter = ({ fav, name, address }: IProps) => (
+const PlacePresenter = ({ fav, name, address, onStarPress }: IProps) => (
   <Place>
-    <Icon>{fav ? "✩" : "★"}</Icon>
+    <Icon onClick={onStarPress}>{fav ? "★" : "✩"}</Icon>
     <Container>
       <Name>{name}</Name>
       <Address theme={myTheme}>{address}</Address>

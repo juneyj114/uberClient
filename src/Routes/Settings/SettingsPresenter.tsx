@@ -45,7 +45,7 @@ type place = {
   id: number;
   name: string;
   address: string;
-  isFav: boolean;
+  fav: boolean;
 };
 
 interface IProps {
@@ -77,7 +77,13 @@ const SettingsPresenter = ({ user, places, loading, logUserOut }: IProps) => (
           </React.Fragment>
         </GridLink>
         {places.map(place => (
-          <Place address={place.address} fav={place.isFav} name={place.name} />
+          <Place
+            address={place.address}
+            fav={place.fav}
+            name={place.name}
+            key={place.id}
+            id={place.id}
+          />
         ))}
         <SLink to={"/places"}>Go to Places</SLink>
         <FakeLink onClick={logUserOut}>Log Out</FakeLink>

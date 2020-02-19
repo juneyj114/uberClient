@@ -1,3 +1,3 @@
-import React from "react";
+import PlaceContainer from "./PlaceContainer";
 
-export default () => <span>Places</span>;
+export default PlaceContainer;

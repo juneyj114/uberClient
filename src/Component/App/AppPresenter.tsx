@@ -53,12 +53,8 @@ const LoggedInRoutes = () => (
     <Route path="/places">
       <Places />
     </Route>
-    <Route path="/add-place">
-      <AddPlace />
-    </Route>
-    <Route path="/find-address">
-      <FindAddress />
-    </Route>
+    <Route path="/add-place" component={AddPlace}></Route>
+    <Route path="/find-address" component={FindAddress}></Route>
     <Redirect to="/" from="*" />
   </Switch>
 );

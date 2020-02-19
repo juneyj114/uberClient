@@ -18,7 +18,6 @@ const SettingsContainer = () => {
   const getSettings = async () => {
     const { data } = await axios.get("/user");
     const { data: places } = await axios.get("/place");
-    console.log(places);
     setState({
       user: {
         profilePhoto: data.profilePhoto,

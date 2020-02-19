@@ -1,3 +1,3 @@
-import React from "react";
+import FindAddressContainer from "./FindAddressContainer";
 
-export default () => <span>FIndAddress</span>;
+export default FindAddressContainer;
