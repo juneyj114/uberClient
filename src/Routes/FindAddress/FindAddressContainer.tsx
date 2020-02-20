@@ -3,25 +3,52 @@ import FindAddressPresenter from "./FindAddressPresenter";
 import { ClickEventValue } from "google-map-react";
 
 interface IState {
-  lat: number;
-  lng: number;
+  place: {
+    lat: number;
+    lng: number;
+  };
+  mapApiLoaded: boolean;
+  mapInstance: any;
+  mapApi: any;
 }
 
 const FindAddressContainer = () => {
   const [state, setState] = useState<IState>({
-    lat: 35.15802281693956,
-    lng: 129.05917450567784
+    place: {
+      lat: 35.15802281693956,
+      lng: 129.05917450567784
+    },
+    mapApiLoaded: false,
+    mapInstance: null,
+    mapApi: null
   });
 
   const onClickFn = ({ lat, lng }: ClickEventValue) => {
     setState({
-      lat,
-      lng
+      ...state,
+      place: {
+        lat,
+        lng
+      }
     });
-    console.log(lat, lng);
   };
 
-  return <FindAddressPresenter {...state} onClickFn={onClickFn} />;
+  const apiHasLoaded = (map: any, maps: any) => {
+    setState({
+      ...state,
+      mapApiLoaded: true,
+      mapInstance: map,
+      mapApi: maps
+    });
+  };
+
+  return (
+    <FindAddressPresenter
+      {...state}
+      onClickFn={onClickFn}
+      apiHasLoaded={apiHasLoaded}
+    />
+  );
 };
 
 export default FindAddressContainer;
