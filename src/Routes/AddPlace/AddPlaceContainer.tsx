@@ -14,11 +14,12 @@ interface IState {
 }
 
 const AddPlaceContainer: React.FC<RouteComponentProps> = props => {
+  const { state: lState }: any = props.location;
   const [state, setState] = useState<IState>({
     name: "",
-    address: "",
-    lat: 1.35,
-    lng: 1.35,
+    address: lState?.address || "",
+    lat: lState?.lat || 0,
+    lng: lState?.lng || 0,
     isFav: false,
     loading: false
   });

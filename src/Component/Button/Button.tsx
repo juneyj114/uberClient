@@ -25,10 +25,16 @@ interface IProps {
   value: string;
   onClick: any;
   disabled?: boolean;
+  className?: string;
 }
 
-const Button = ({ value, onClick, disabled = false }: IProps) => (
-  <Container value={value} onClick={onClick} disabled={disabled}></Container>
+const Button = ({ value, onClick, disabled = false, className }: IProps) => (
+  <Container
+    value={value}
+    onClick={onClick}
+    disabled={disabled}
+    className={className}
+  ></Container>
 );
 
 export default Button;
